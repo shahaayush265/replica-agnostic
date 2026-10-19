@@ -1,0 +1,27 @@
+{
+  "name": "replica-agnostic",
+  "version": "1.0.0",
+  "description": "Agent-agnostic clean-room app replication skill pack for AI coding assistants (Antigravity, Claude Code, Cursor) with automated Python verification tools.",
+  "keywords": [
+    "ai-agent",
+    "agent-skills",
+    "clean-room-engineering",
+    "app-cloning",
+    "antigravity",
+    "claude-code",
+    "cursor",
+    "software-architecture",
+    "reverse-engineering",
+    "preflight-checks"
+  ],
+  "author": "Aayush Shah (https://github.com/shahaayush265)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shahaayush265/replica-agnostic.git"
+  },
+  "homepage": "https://github.com/shahaayush265/replica-agnostic#readme",
+  "bugs": {
+    "url": "https://github.com/shahaayush265/replica-agnostic/issues"
+  }
+}
