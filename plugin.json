@@ -1,0 +1,10 @@
+{
+  "name": "replica-agnostic",
+  "description": "Eleven agent-agnostic skills that clone any app: reverse-engineer it, rebuild it, test it for bugs, and fix what its users hate.",
+  "suggestedPrompts": [
+    "Map out an app to clone with /replica-recon",
+    "Compare my clone against the original with /replica-diff",
+    "Analyze reviews and complaints with /replica-entrepreneur"
+  ],
+  "version": "1.0.0"
+}

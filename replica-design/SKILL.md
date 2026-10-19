@@ -17,7 +17,8 @@ Reads `replica/recon.md` and the screenshots in `replica/screens/`. Writes
 Tailwind mapping, and `replica/design/components.md`.
 
 ```bash
-python3 contrast.py replica/design/tokens.json     # every text pair, WCAG ratio
+python3 ./scripts/build_tokens.py replica/design/tokens.json  # compiles tokens.css & Tailwind config, checks contrast
+python3 ./scripts/contrast.py replica/design/tokens.json      # WCAG contrast check only
 ```
 
 ## The rules

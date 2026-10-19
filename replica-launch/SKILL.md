@@ -17,7 +17,7 @@ and `replica/brand.json`. Writes `replica/launch/`: `landing.md`,
 `pricing.md`, `listing.json`, `launch-plan.md`.
 
 ```bash
-python3 listing.py replica/launch/listing.json      # limits, claims, the original's name
+python3 ./scripts/listing.py replica/launch/listing.json    # limits, claims, the original's name
 ```
 
 Start from `listing.example.json` in this folder.

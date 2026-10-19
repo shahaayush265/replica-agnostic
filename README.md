@@ -1,6 +1,6 @@
 # The Replica skill
 
-Eleven Claude skills that clone any app. Free, MIT, no signup, no API key,
+Eleven agent skills that clone any app. Free, MIT, no signup, no API key,
 nothing to connect.
 
 One reverse-engineers the app you want to clone. One rebuilds it. One tests it
@@ -16,38 +16,79 @@ listing, and put it live on your domain.
 clean-room style. Not its code, its logo, its copy or its content. The
 fine print is at the bottom, and the skills enforce it.
 
+## What Makes This Fork Different
+
+This repository is an agent-agnostic fork of [`Jakeschincariol/replica-skill`](https://github.com/Jakeschincariol/replica-skill):
+
+1. **Fully Agent-Agnostic**:
+   - Refactored all platform-specific references, directories, and prompt instructions so it runs across any AI agent (Antigravity, Claude Code, Cursor, Codex, OpenCode, and others).
+   - Standardized on agent plugin manifests (`plugin.json`), agent rules (`rules/AGENTS.md`), and standard skill paths (`.agents/skills/`).
+
+2. **Automated Helper Scripts**:
+   - The original skill pack relied on manual model actions and single-file scripts. This fork adds a suite of zero-dependency automation scripts (Python standard library only) to run deterministic tasks quickly and reliably:
+     - `replica.py`: Unified CLI command dispatcher.
+     - `init_replica.py`: Scaffolds workspace directories and starter templates.
+     - `fetch_reviews.py`: Auto-fetches real user reviews from Apple App Store RSS and Hacker News Algolia API.
+     - `build_tokens.py`: Compiles design tokens into CSS variables and Tailwind configuration.
+     - `batch_diff.py`: Automated batch comparison of screenshots with visual edge diffs.
+     - `generate_test_plan.py`: Parses recon flows and scaffolds test plans and Playwright test specs.
+     - `check_bugs.py`: Bug severity auditor and pre-deployment blocking gate.
+     - `check_brand.py`: DNS availability and trademark clearance screening links.
+     - `preflight.py`: Automated preflight gate checker evaluating tests, bugs, parity, sweep, and store listing.
+
 ## Install
 
-Paste this into Claude:
+### In Antigravity
+
+**As a plugin (recommended):**
+Clone or copy this repository into your project's `.agents/plugins/` (or globally in `~/.gemini/config/plugins/`):
+
+```bash
+git clone https://github.com/shahaayush265/replica-agnostic.git .agents/plugins/replica-agnostic
+```
+
+Antigravity automatically discovers `plugin.json`, rules in `rules/AGENTS.md`, and all 11 skills in `skills/`.
+
+**As standalone workspace skills:**
+Copy the skill folders into `.agents/skills/`:
+
+```bash
+cp -r replica-agnostic/skills/* .agents/skills/
+```
+
+### In other agent environments
+
+Paste this into your agent:
 
 ```
-https://github.com/Jakeschincariol/replica-skill
+https://github.com/shahaayush265/replica-agnostic
 
 install skill
 ```
 
-Or as a plugin, in Claude Code:
+Or as a plugin, in environments supporting plugin marketplaces:
 
 ```
-/plugin marketplace add Jakeschincariol/replica-skill
-/plugin install replica-skill@replica-skill
+/plugin marketplace add shahaayush265/replica-agnostic
+/plugin install replica-agnostic@replica-agnostic
 ```
 
-Claude Code namespaces plugin skills, so installed as a plugin they show up as
-`/replica-skill:replica-recon` and so on. Copy the folders instead if you want
+If your agent namespaces plugin skills, installed as a plugin they show up as
+`/replica-agnostic:replica-recon` and so on. Copy the folders into your agent's skills directory instead if you want
 plain `/replica-recon`:
 
 ```bash
-git clone https://github.com/Jakeschincariol/replica-skill.git
-cp -r replica-skill/replica-* ~/.claude/skills/
+git clone https://github.com/shahaayush265/replica-agnostic.git
+# Global skills directory (e.g. ~/.agents/skills/ or your agent's skills path):
+cp -r replica-agnostic/skills/* ~/.agents/skills/
 ```
 
 Project-local instead of global: copy the same folders into your repo's
-`.claude/skills/`. No Claude Code at all? Paste any single `SKILL.md` at the
+`.agents/skills/`. No agent skill system at all? Paste any single `SKILL.md` at the
 top of a chat and it runs as a mode. You lose the Python tools, but the
 method works.
 
-The tools need Python 3.8 or newer. Nothing to pip install.
+The tools need Python 3.8 or newer. Standard library only, nothing to pip install.
 
 ## The eleven
 
@@ -149,7 +190,23 @@ deploy until it is clean.
 the title, wasted keyword characters, and the original's name anywhere in
 your listing.
 
+### Automation Scripts
+
+The skill pack includes automation scripts so tedious tasks run deterministically
+without manual model intervention:
+
+- **`replica.py`**: Unified CLI dispatcher (`python3 replica.py <command>`).
+- **`init_replica.py`**: Scaffolds the `replica/` directory structure and starter templates.
+- **`fetch_reviews.py`**: Automatically fetches public reviews from Apple App Store RSS and Hacker News Algolia search into `replica/reviews.csv`.
+- **`build_tokens.py`**: Compiles `tokens.json` into CSS custom variables (`tokens.css`) and Tailwind CSS theme extensions (`tailwind.tokens.js`).
+- **`batch_diff.py`**: Discovers corresponding screenshot pairs and runs edge layout comparisons, updating `replica/parity.md` in one step.
+- **`generate_test_plan.py`**: Parses recon flows and generates `replica/test-plan.md` plus Playwright E2E spec stubs.
+- **`check_bugs.py`**: Audits `replica/bugs.md` and gates deployment by enforcing 0 open S1/S2 bugs.
+- **`check_brand.py`**: Automated DNS and trademark screening links for candidate brand names.
+- **`preflight.py`**: Complete automated preflight gate evaluator that verifies tests, bugs, parity, sweep, and listing before deployment.
+
 ```bash
+python3 replica.py --help
 python3 -m unittest discover -s tests -v
 ```
 
@@ -207,11 +264,13 @@ other's.
 
 ## Credit
 
-Made by Jake Schincariol, [opusjake.ai](https://opusjake.ai). Siblings:
+Originally created by Jake Schincariol ([opusjake.ai](https://opusjake.ai), [`Jakeschincariol/replica-skill`](https://github.com/Jakeschincariol/replica-skill)). Siblings:
 [Arena](https://github.com/Jakeschincariol/arena-skill),
 [X](https://github.com/Jakeschincariol/x-agent-skill),
 [LinkedIn](https://github.com/Jakeschincariol/linkedin-agent-skill),
 [Instagram](https://github.com/Jakeschincariol/instagram-agent-skill).
+
+Fork maintained, made agent-agnostic, and extended with automation tooling by Aayush Shah ([shahaayush265/replica-agnostic](https://github.com/shahaayush265/replica-agnostic)).
 
 ## License
 

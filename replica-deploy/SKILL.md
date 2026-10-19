@@ -19,26 +19,30 @@ Reads everything in `replica/`. Writes `replica/deploy.md` (the checklist in
 
 - **Nothing goes live without the user's go.** Show the preflight results and
   ask.
-- **The user buys and signs in.** Claude never buys a domain, enters a card,
-  types a password or pastes a live key. Claude writes the exact DNS records,
+- **The user buys and signs in.** The agent never buys a domain, enters a card,
+  types a password or pastes a live key. The agent writes the exact DNS records,
   env var names and commands; the user does the account steps.
 - **Not until it is rebranded.** The sweep must be clean. No exceptions.
 
 ## Step 1: preflight
 
-Run every check and paste the results into `deploy.md`:
+Run the automated preflight gate check to evaluate all deployment criteria:
 
 ```bash
-npx playwright test                                                  # replica-test
-python3 ../replica-diff/parity.py replica/features.csv               # must-haves done
-python3 ../replica-brand/sweep.py . --config replica/brand.json      # exit 0: clean
-python3 ../replica-launch/listing.py replica/launch/listing.json     # if shipping to stores
-npm run build                                                        # production build passes
+python3 ./scripts/preflight.py --fail-under 80
 ```
 
-(Paths are relative to wherever the pack is installed. Under
-`~/.claude/skills/` that is `~/.claude/skills/replica-diff/parity.py` and so
-on.)
+This automatically runs the bug audit (0 open S1/S2 bugs required), feature parity check,
+rebrand sweep, and store listing lint, and writes `replica/deploy.md`.
+
+You can also run individual checks manually:
+
+```bash
+python3 ../replica-test/scripts/check_bugs.py replica/bugs.md --fail-on-blocking
+python3 ../replica-diff/scripts/parity.py replica/features.csv
+python3 ../replica-brand/scripts/sweep.py . --config replica/brand.json
+python3 ../replica-launch/scripts/listing.py replica/launch/listing.json
+```
 
 Plus by hand: no open S1 or S2 bugs, privacy policy and terms pages live
 (listing every processor), cookie banner if you use non-essential cookies in

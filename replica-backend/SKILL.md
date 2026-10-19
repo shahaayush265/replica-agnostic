@@ -19,10 +19,10 @@ Reads `replica/architecture.md`. Writes migrations and server code, and keeps
 - **Official, public APIs only, with the user's own keys.** Never call the
   original app's private endpoints, never reuse its OAuth client, never proxy
   through it.
-- **The user creates accounts and keys.** Claude never signs up for services,
+- **The user creates accounts and keys.** The agent never signs up for services,
   never types a password, card or live key. The user creates the Stripe,
   Supabase, Resend or Google Cloud project and puts keys in `.env.local`.
-  Claude writes `.env.example` with every variable name and no values.
+  The agent writes `.env.example` with every variable name and no values.
 - **Test mode first.** Stripe test keys and test cards until replica-deploy.
 
 ## Auth

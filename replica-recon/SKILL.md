@@ -23,6 +23,12 @@ replica/features.csv    the feature matrix (template: features.csv in this folde
 replica/screens/        reference screenshots of the original. Never shipped.
 ```
 
+Initialize the workspace directory tree and templates:
+
+```bash
+python3 ./scripts/init_replica.py
+```
+
 ## The rules, before anything else
 
 This skill rebuilds **functionality and UX patterns**, clean-room style. It

@@ -15,11 +15,12 @@ description: >-
 Nothing launches under the original's identity. This skill is the line
 between "a clone" and "your app".
 
-Tool in this folder:
+Tools in this folder:
 
 ```bash
-python3 sweep.py . --avoid "Original Name,Its Company" --domains original.com --colors "#006bff"
-python3 sweep.py . --config replica/brand.json        # same, from the brand file
+python3 ./scripts/check_brand.py Slotwise Calvo Harbor --avoid "Original Name"  # screen names and domains
+python3 ./scripts/sweep.py . --avoid "Original Name,Its Company" --domains original.com --colors "#006bff"
+python3 ./scripts/sweep.py . --config replica/brand.json                        # sweep from brand.json
 ```
 
 Writes `replica/brand.md` and `replica/brand.json` (`avoid`, `domains`,

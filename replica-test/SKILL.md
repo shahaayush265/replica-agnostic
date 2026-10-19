@@ -16,6 +16,11 @@ Reads the flows in `replica/recon.md`. Writes `replica/test-plan.md`,
 `replica/bugs.md`, and end-to-end tests in the project (`e2e/`). Templates in
 this folder: `test-plan.md`, `bug-report.md`, `e2e.example.spec.ts`.
 
+```bash
+python3 ./scripts/generate_test_plan.py --scaffold-e2e   # generate test-plan.md and Playwright stubs
+python3 ./scripts/check_bugs.py replica/bugs.md         # audit bugs and report blocking S1/S2 issues
+```
+
 ## The rule
 
 **Test your clone, not the original.** Never load test, fuzz, script or

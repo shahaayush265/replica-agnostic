@@ -8,7 +8,7 @@ from _load import ROOT
 SKILLS = ["replica-recon", "replica-architect", "replica-design", "replica-build",
           "replica-backend", "replica-test", "replica-diff", "replica-entrepreneur",
           "replica-brand", "replica-launch", "replica-deploy"]
-ABOUT = ("Eleven free Claude skills that clone any app: reverse-engineer it, rebuild it, "
+ABOUT = ("Eleven free agent skills that clone any app: reverse-engineer it, rebuild it, "
          "test it for bugs, then fix what its users hate. Free, MIT.")
 
 
@@ -36,26 +36,26 @@ class Repo(unittest.TestCase):
     def test_plugin_manifest_points_at_the_root_skills(self):
         with open(os.path.join(ROOT, ".claude-plugin", "plugin.json")) as fh:
             plugin = json.load(fh)
-        self.assertEqual(plugin["name"], "replica-skill")
+        self.assertEqual(plugin["name"], "replica-agnostic")
         self.assertEqual(plugin["skills"], "./")
         self.assertEqual(plugin["description"], ABOUT)
         with open(os.path.join(ROOT, ".claude-plugin", "marketplace.json")) as fh:
             market = json.load(fh)
-        self.assertEqual(market["name"], "replica-skill")
-        self.assertEqual(market["plugins"][0]["name"], "replica-skill")
+        self.assertEqual(market["name"], "replica-agnostic")
+        self.assertEqual(market["plugins"][0]["name"], "replica-agnostic")
 
     def test_readme_carries_the_reel_copy(self):
         with open(os.path.join(ROOT, "README.md"), encoding="utf-8") as fh:
             readme = " ".join(fh.read().split())
         self.assertTrue(readme.startswith("# The Replica skill"))
         for line in (
-            "Eleven Claude skills that clone any app. Free, MIT, no signup, no API key, "
+            "Eleven agent skills that clone any app. Free, MIT, no signup, no API key, "
             "nothing to connect.",
             "One reverse-engineers the app you want to clone. One rebuilds it. One tests it "
             "for bugs. And one is the Entrepreneur: it reads what the app's users hate and "
             "fixes it in yours, so you have an app you can sell.",
-            "/plugin marketplace add Jakeschincariol/replica-skill",
-            "/plugin install replica-skill@replica-skill",
+            "/plugin marketplace add shahaayush265/replica-agnostic",
+            "/plugin install replica-agnostic@replica-agnostic",
             "## Fine print",
         ):
             self.assertIn(line, readme)

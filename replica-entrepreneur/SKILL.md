@@ -16,10 +16,11 @@ description: >-
 A straight copy of an app has no reason to exist. This skill finds the reason:
 what the original's users hate, in their own words, and fixes it in yours.
 
-Tool in this folder:
+Tools in this folder:
 
 ```bash
-python3 reviews.py replica/reviews.csv --out replica/feedback.md
+python3 ./scripts/fetch_reviews.py --app-id <APP_ID> --hn-query "<Query>"  # auto-fetch public reviews
+python3 ./scripts/reviews.py replica/reviews.csv --out replica/feedback.md    # analyze & rank complaints
 ```
 
 ## The rules, which are not negotiable

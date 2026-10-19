@@ -12,13 +12,12 @@ description: >-
 
 # replica-diff
 
-Two tools in this folder, both standard-library Python, no installs:
+Tools in this folder, all standard-library Python, no installs:
 
 ```bash
-python3 parity.py replica/features.csv                         # feature parity + missing list
-python3 imgdiff.py replica/screens/S07.png replica/clone-screens/S07.png --out diff-S07.png
-python3 imgdiff.py a.png b.png --json > replica/diffs/S07.json # for parity.py --visual
-python3 parity.py replica/features.csv --visual replica/diffs/*.json --markdown > replica/parity.md
+python3 ./scripts/batch_diff.py                                # run batch diff on all screens + generate parity.md
+python3 ./scripts/parity.py replica/features.csv               # feature parity + missing list
+python3 ./scripts/imgdiff.py original.png clone.png --out diff.png # single screen visual layout diff
 ```
 
 ## What parity means here
